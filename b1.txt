@@ -1,3 +1,128 @@
-z mastra
+@using Abp.Web.Mvc.Extensions
+@using System.Web.Optimization
+@using Microsoft.Owin.Security
+@using Microsoft.AspNet.Identity
+@using PrintDigital.Authorization;
 
-z b1
+<header class="c-layout-header c-layout-header-4 c-layout-header-default-mobile" data-minimize-offset="80">
+    <!-- BEGIN HEADER INNER -->
+    <div class="c-navbar" style="background:#fff;">
+            <div class="container">
+                    <div class="c-navbar-wrapper clearfix">
+                            <div class="c-brand c-pull-left">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="@Url.Action("index", "home")">
+                <img src="~/Content/images/logo-typocon-c.png" alt="TYPOCON" class="logo-default" height="45">
+            </a>
+            <div class="menu-toggler sidebar-toggler">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+            </div>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!-- BEGIN PAGE ACTIONS -->
+        <!-- DOC: Remove "hide" class to enable the page header actions -->
+        <div class="page-actions hide">
+            <div class="btn-group">
+                <button type="button" class="btn red-haze btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                    <span class="hidden-sm hidden-xs">Actions&nbsp;</span>
+                    <i class="fa fa-angle-down"></i>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="icon-docs"></i> New Action
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+                            </div>
+        <!-- END PAGE ACTIONS -->
+        <!-- BEGIN PAGE TOP -->
+        <div class="page-top" style="width:auto;clear:initial">
+            @*<form class="search-form" action="#" method="GET">
+                <div class="input-group">
+                    <input type="text" class="form-control input-sm" placeholder="Search..." name="query">
+                    <span class="input-group-btn">
+                        <a href="javascript:;" class="btn submit" style="border-color: transparent;">
+                            <i class="icon-magnifier" style="margin-right:0;"></i>
+                        </a>
+                    </span>
+                </div>
+            </form>*@
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+
+                    <li class="separator hide"> </li>
+
+                    @Html.Action("LanguageSelection", "Layout")
+
+                    <li class="separator hide"> </li>
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <li class="dropdown dropdown-user dropdown-dark">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <span class="username username-hide-on-mobile"><span class="is-impersonator-login c-font-red-2" style="display:none;">[A]</span> @Html.Action("GetUserName", "Layout", new { area = "" })</span>
+                            <!-- DOC: Do not remove below empty space(&nbsp;) as its purposely used -->
+                            <img alt="" class="img-circle" src="~/Areas/Admin/Assets/global/img/ProfilePic.png" />
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li class="is-impersonator-login">
+                                <a href="#" id="backToImpersonator">
+                                    <i class="icon-arrow-left"></i> @L("BackToMyAccount")
+                                </a>
+                            </li>
+                            <li class="divider is-impersonator-login"> </li>
+                            <li>
+                                <a href="#profile">
+                                    <i class="icon-user"></i> @L("MyProfile")
+                                </a>
+                            </li>
+                            @*<li>
+                                <a href="#" id="UserProfileChangePictureLink">
+                                    <i class="icon-emotsmile"></i> @L("ChangeProfilePicture")
+                                </a>
+                            </li>*@
+                            <li>
+                                <a href="#" id="UserProfileChangePasswordLink">
+                                    <i class="icon-key"></i> @L("ChangePassword")
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#externalAccounts" id="UserProfileExternalAccountsLink">
+                                    <i class="icon-social-google"></i> @L("ExternalAccounts")
+                                </a>
+                            </li>
+                            <li class="divider"> </li>
+                            <li>
+                                <a href="@Url.Action("logoutadmin", "account", new { area="" })">
+                                    <i class="icon-logout"></i> @L("LogOut")
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                    @if (IsGranted(PermissionNames.Admin_ShopAdministration_Chat))
+                    {
+                        <li class="dropdown dropdown-extended quick-sidebar-toggler">
+                            <span class="sr-only">Toggle Quick Sidebar</span>
+                            <i class="icon-logout"></i>
+                        </li>
+                    }
+                    <!-- END QUICK SIDEBAR TOGGLER -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+    </div>
+        <!-- END PAGE TOP -->
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+</header>
